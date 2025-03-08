@@ -6,6 +6,41 @@ import LottieView from "lottie-react-native";
 
 const SONGS = [
   {
+    title: " ॐ महामृत्युंजय मंत्र",
+    artist: "Shankar Sahney",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368170/Audio12_ShivjiMahamrityunjay_oinbky.mp3",
+    },
+  },
+  {
+    title: "श्री शिव रुद्राष्टकम",
+    artist: "Religious India",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368182/Audio16_ShivaRudra_cgcxem.mp3",
+    },
+  },
+  {
+    title: "श्री निर्वाण षट्कम:",
+    artist: "Religious India",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio18_NirvanaShatkam_qa2ctw.mp3",
+    },
+  },
+  {
+    title: "श्री शिव पंचाक्षर",
+    artist: "Religious India",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio19_PanchaksharStotra_qzu1bo.mp3",
+    },
+  },
+  {
+    title: "श्री शिव तांडव स्तोत्र",
+    artist: "Shankar Mahadevan",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368149/Audio20_ShivTandavStotram_fcjer5.mp3",
+    },
+  },
+  {
     title: "108 गणपती महामंत्र",
     artist: "Priya Dhodi",
     src: {
@@ -93,41 +128,6 @@ const SONGS = [
     },
   },
 
-  {
-    title: " ॐ महामृत्युंजय मंत्र",
-    artist: "Shankar Sahney",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368170/Audio12_ShivjiMahamrityunjay_oinbky.mp3",
-    },
-  },
-  {
-    title: "श्री शिव रुद्राष्टकम",
-    artist: "Religious India",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368182/Audio16_ShivaRudra_cgcxem.mp3",
-    },
-  },
-  {
-    title: "श्री निर्वाण षट्कम:",
-    artist: "Religious India",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio18_NirvanaShatkam_qa2ctw.mp3",
-    },
-  },
-  {
-    title: "श्री शिव पंचाक्षर",
-    artist: "Religious India",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio19_PanchaksharStotra_qzu1bo.mp3",
-    },
-  },
-  {
-    title: "श्री शिव तांडव स्तोत्र",
-    artist: "Shankar Mahadevan",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368149/Audio20_ShivTandavStotram_fcjer5.mp3",
-    },
-  },
   {
     title: "Ram Siya Ram",
     artist: "SpiritualIndia",
@@ -233,6 +233,7 @@ const MusicPlayer = () => {
 
   return (
     <View style={styles.containerOut}>
+      <Text style={styles.madeby}>🕉️ Made by Ashish 🕉️</Text>
       <LottieView
         source={require("@/assets/animations/music.json")}
         autoPlay
@@ -334,5 +335,11 @@ const styles = StyleSheet.create({
     width: "70%",
     height: "70%",
     zIndex: 2,
+  },
+  madeby: {
+    fontSize: 10,
+    color: "white",
+    top: 280,
+    zIndex: 5,
   },
 });
