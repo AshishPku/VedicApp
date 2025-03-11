@@ -1,63 +1,93 @@
-import {
-  StyleSheet,
-  View,
-  Text,
-  ImageBackground,
-  SafeAreaView,
-  ScrollView,
-} from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Text, SafeAreaView, ScrollView } from "react-native";
+import LottieView from "lottie-react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
-import { LinearGradient } from "expo-linear-gradient";
 import CustomButton from "@/components/CustomButton";
-import backgroundImg from "@/assets/images/background.jpg";
 import { router } from "expo-router";
 
-const quotes = [
-  "It helps you to focus your mind.",
-  "Breathe in peace, exhale stress.",
-  "Quiet the mind, and the soul will speak.",
-  "Meditation is the key to tranquility.",
-  "Find your inner peace, one breath at a time.",
-  "Silence isn’t empty, it’s full of answers.",
-];
-
 export default function HomeScreen() {
+  const [quotes, setQuotes] = useState<string[]>([]);
+  const [quote, setQuote] = useState("");
+
+  useEffect(() => {
+    const fetchQuotes = async () => {
+      try {
+        const response = await fetch(
+          "https://api.jsonbin.io/v3/b/67d021048a456b796673bad4"
+        );
+        const data = await response.json();
+        if (data && data.record && Array.isArray(data.record.quotes)) {
+          setQuotes(data.record.quotes);
+        }
+      } catch (error) {
+        console.error("Error fetching quotes:", error);
+      }
+    };
+
+    fetchQuotes();
+  }, []);
+
+  useEffect(() => {
+    const loadQuote = async () => {
+      try {
+        const lastQuoteIndex = await AsyncStorage.getItem("lastQuoteIndex");
+        const lastQuoteDate = await AsyncStorage.getItem("lastQuoteDate");
+        const today = new Date().toDateString();
+
+        if (
+          lastQuoteIndex !== null &&
+          lastQuoteDate === today &&
+          quotes.length > 0
+        ) {
+          setQuote(quotes[parseInt(lastQuoteIndex)]);
+        } else if (quotes.length > 0) {
+          const newIndex = Math.floor(Math.random() * quotes.length);
+          setQuote(quotes[newIndex]);
+          await AsyncStorage.setItem("lastQuoteIndex", newIndex.toString());
+          await AsyncStorage.setItem("lastQuoteDate", today);
+        }
+      } catch (error) {
+        console.error("Error loading quote:", error);
+      }
+    };
+
+    if (quotes.length > 0) {
+      loadQuote();
+    }
+  }, [quotes]);
+
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={backgroundImg}
-        resizeMode="cover"
-        style={styles.imgback}
-      >
-        {/* Gradient Overlay */}
-        <LinearGradient
-          colors={["rgba(0,0,0,0.2)", "rgba(0,0,0,0.6)"]}
-          style={styles.gradient}
-        />
+      <LottieView
+        source={require("@/assets/animations/background.json")}
+        autoPlay
+        loop
+        style={styles.lottie}
+      />
 
-        <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={styles.safeArea}>
+        <Text>
           <Text style={styles.textHeader}>Connect Your</Text>
           <Text style={styles.textHeader}>
             <Text style={styles.textHeader1}>Soul </Text>With
             <Text style={styles.textHeader1}> Nature </Text>
           </Text>
-          <ScrollView
-            contentContainerStyle={styles.scrollView}
-            showsVerticalScrollIndicator={false}
-          >
-            {quotes.map((quote, index) => (
-              <Text key={index} style={styles.text}>
-                {quote}
-              </Text>
-            ))}
+        </Text>
+
+        <Text style={styles.textHeader2}>Quote of the Day</Text>
+        <View style={styles.quoteBox}>
+          <ScrollView>
+            <Text style={styles.quoteText}>{quote}</Text>
           </ScrollView>
-        </SafeAreaView>
+        </View>
+
         <CustomButton
           onPress={() => router.push("/nature-meditate")}
           title="Get Started"
         />
         <StatusBar style="light" />
-      </ImageBackground>
+      </SafeAreaView>
     </View>
   );
 }
@@ -65,34 +95,34 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignContent: "space-between",
   },
-  imgback: {
-    flex: 1,
-  },
-  gradient: {
+  lottie: {
     ...StyleSheet.absoluteFillObject,
+    width: "119%",
+    height: "100%",
   },
   safeArea: {
     flex: 1,
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 20,
     paddingVertical: 40,
   },
-  scrollView: {
-    justifyContent: "center",
-    alignItems: "center",
+  quoteBox: {
+    backgroundColor: "rgba(128, 128, 128, 0.7)",
+    padding: 20,
+    borderRadius: 15,
+    marginVertical: 20,
+    width: "110%",
+    height: 220,
   },
-  text: {
-    color: "#FFFFFF",
+  quoteText: {
+    color: "#fff",
     fontSize: 20,
-    fontWeight: "600",
     textAlign: "center",
-    marginVertical: 15,
-    textShadowColor: "rgba(0, 0, 0, 0.6)",
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 8,
-    lineHeight: 34,
+    fontWeight: "600",
+    lineHeight: 32,
   },
   textHeader: {
     color: "#5df542",
@@ -105,5 +135,10 @@ const styles = StyleSheet.create({
     fontSize: 36,
     textAlign: "center",
     fontWeight: "800",
+  },
+  textHeader2: {
+    color: "white",
+    fontSize: 30,
+    fontWeight: "700",
   },
 });
