@@ -1,50 +1,80 @@
-# Welcome to your Expo app 👋
+# 🌿 Nature & Soul Meditation App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Welcome to **Nature & Soul Meditation App** – a serene and mindful experience designed to help you connect with nature and find inner peace. This app displays **daily inspiring nature quotes** with an **animated Lottie background**, guiding users towards relaxation and mindfulness.
 
-## Get started
+## 🚀 Features
 
-1. Install dependencies
+- **Daily Quotes**: Get a new, inspiring quote each day related to nature and the soul.
+- **Lottie Animations**: A beautiful animated background to enhance relaxation.
+- **Scrollable Quote Box**: Read long quotes comfortably within a fixed-height box.
+- **Custom UI**: Elegant typography and smooth UI experience.
+- **State Persistence**: The app remembers the last quote you saw for a seamless experience.
+
+## 📸 App Screenshots
+
+<p align="center">
+  <img src="https://github.com/AshishPku/VedicApp/blob/main/screenshots/img5.jpeg" width="30%" />
+  <img src="https://github.com/AshishPku/VedicApp/blob/main/screenshots/img4.jpeg" width="30%" />
+   <img src="https://github.com/AshishPku/VedicApp/blob/main/screenshots/img3.jpeg" width="30%" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/AshishPku/VedicApp/blob/main/screenshots/img1.jpeg" width="30%" />
+  <img src="https://github.com/AshishPku/VedicApp/blob/main/screenshots/img2.jpeg" width="30%" />
+  
+</p>
+## 📦 Installation
+1. Clone the repository:
+
+```bash
+git clone https://github.com/AshishPku/VedicApp.git
+cd VedicApp
+```
+
+2. Install dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+3. Start the development server:
 
    ```bash
-    npx expo start
+   npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+## 📱 Running the App
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+Once started, you can run the app on:
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+- [**Development Build**](https://docs.expo.dev/develop/development-builds/introduction/)
+- [**Android Emulator**](https://docs.expo.dev/workflow/android-studio-emulator/)
+- [**iOS Simulator**](https://docs.expo.dev/workflow/ios-simulator/)
+- [**Expo Go**](https://expo.dev/go) (for quick testing)
 
-## Get a fresh project
+## 🛠 Reset Project
 
-When you're ready, run:
+If you want a clean slate:
 
 ```bash
 npm run reset-project
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+This will move the starter code to `app-example` and create a blank `app` directory for development.
 
-## Learn more
+## 📖 Learn More
 
-To learn more about developing your project with Expo, look at the following resources:
+- [Expo Documentation](https://docs.expo.dev/)
+- [React Native Guide](https://reactnative.dev/docs/getting-started)
+- [Lottie Animations](https://airbnb.io/lottie/#/)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 🌎 Community & Support
 
-## Join the community
+Join the growing community of developers!
 
-Join our community of developers creating universal apps.
+- [Expo GitHub](https://github.com/expo/expo)
+- [Discord Community](https://chat.expo.dev)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+✨ **Relax, breathe, and let your soul connect with nature!** ✨
