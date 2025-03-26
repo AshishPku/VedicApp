@@ -1,7 +1,10 @@
 # 🌿 Nature & Soul Meditation App
 
 Welcome to **Nature & Soul Meditation App** – a serene and mindful experience designed to help you connect with nature and find inner peace. This app displays **daily inspiring nature quotes** with an **animated Lottie background**, guiding users towards relaxation and mindfulness.
-
+## Download the App
+  <a href="https://drive.google.com/file/d/18qiEmMhGmBnQw2He2LZZvomB-T02qhvc/view?usp=drive_link" download>
+        <button>Download APK</button>
+    </a>
 ## 🚀 Features
 
 - **Daily Quotes**: Get a new, inspiring quote each day related to nature and the soul.
