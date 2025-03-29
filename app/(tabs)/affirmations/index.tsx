@@ -1,6 +1,5 @@
-import React from "react";
-import { View, StyleSheet, Text, ScrollView, SafeAreaView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import React, { useState } from "react";
+import { View, StyleSheet, Text, FlatList, SafeAreaView } from "react-native";
 import GuidedAffirmationsGallery from "@/components/GuidedAffirmationsGallery";
 import img1 from "@/assets/images/background_common.webp";
 const AFFIRMATION_GALLERY = [
@@ -530,28 +529,31 @@ const AFFIRMATION_GALLERY = [
     ],
   },
 ];
-
 const Affirmations = () => {
+  const [expandedTitle, setExpandedTitle] = useState<string | null>(null); // Track the expanded title
+
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={["rgba(0,0,0,1)", "rgba(0,0,0,0.8)"]}
-        style={styles.gradient}
-      />
-      <View style={styles.fixedHeader}>
-        <Text style={styles.title}>Change Your Views with Affirmations</Text>
+      <View style={styles.header}>
+        <Text style={styles.headerTitle}>
+          Change Your Views with Affirmations
+        </Text>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.galleryContainer}>
-          {AFFIRMATION_GALLERY.map((g) => (
-            <GuidedAffirmationsGallery
-              key={g.title}
-              title={g.title}
-              previews={g.data}
-            />
-          ))}
-        </View>
-      </ScrollView>
+      <FlatList
+        data={AFFIRMATION_GALLERY}
+        numColumns={2}
+        keyExtractor={(item) => item.title}
+        renderItem={({ item }) => (
+          <GuidedAffirmationsGallery
+            title={item.title}
+            previews={item.data}
+            isExpanded={expandedTitle === item.title} // Pass expanded state
+            setExpandedTitle={setExpandedTitle} // Pass callback to update expanded title
+          />
+        )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.galleryContainer}
+      />
     </SafeAreaView>
   );
 };
@@ -559,22 +561,23 @@ const Affirmations = () => {
 export default Affirmations;
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#000" },
-  gradient: { ...StyleSheet.absoluteFillObject },
-  fixedHeader: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: "rgba(0,0,0,1)",
-    paddingVertical: 40,
-    zIndex: 10,
+  container: {
+    flex: 1,
+    backgroundColor: "#000",
   },
-  title: {
+  header: {
+    paddingVertical: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: "#333",
+  },
+  headerTitle: {
     fontSize: 20,
     fontWeight: "bold",
     color: "#fff",
     textAlign: "center",
   },
-  galleryContainer: { marginTop: 120 },
+  galleryContainer: {
+    paddingHorizontal: 10,
+    paddingTop: 10,
+  },
 });

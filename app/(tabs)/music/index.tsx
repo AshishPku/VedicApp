@@ -6,6 +6,13 @@ import LottieView from "lottie-react-native";
 
 const SONGS = [
   {
+    title: "Ram Siya Ram",
+    artist: "SpiritualIndia",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368181/Audio13_RamSiyaRam_rfc4np.mp3",
+    },
+  },
+  {
     title: " ॐ महामृत्युंजय मंत्र",
     artist: "Shankar Sahney",
     src: {
@@ -13,10 +20,17 @@ const SONGS = [
     },
   },
   {
-    title: "श्री शिव रुद्राष्टकम",
-    artist: "Religious India",
+    title: "श्री राम स्तुति",
+    artist: "Ravindra Singh",
     src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368182/Audio16_ShivaRudra_cgcxem.mp3",
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368161/Audio2_1_Ramji_retbdq.mp3",
+    },
+  },
+  {
+    title: "Kishori Radhe",
+    artist: "Gaurav Krishna Goswami",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368174/Audio7_KishoriRadhe_nxv4sv.mp3",
     },
   },
   {
@@ -26,11 +40,12 @@ const SONGS = [
       uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio18_NirvanaShatkam_qa2ctw.mp3",
     },
   },
+
   {
-    title: "श्री शिव पंचाक्षर",
-    artist: "Religious India",
+    title: "108 गणपती महामंत्र",
+    artist: "Priya Dhodi",
     src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio19_PanchaksharStotra_qzu1bo.mp3",
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368172/Audio4_Ganeshji_xcfz27.mp3",
     },
   },
   {
@@ -41,13 +56,6 @@ const SONGS = [
     },
   },
   {
-    title: "108 गणपती महामंत्र",
-    artist: "Priya Dhodi",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368172/Audio4_Ganeshji_xcfz27.mp3",
-    },
-  },
-  {
     title: "Shreeman Narayan",
     artist: "Studio Sangeeta",
     src: {
@@ -55,10 +63,24 @@ const SONGS = [
     },
   },
   {
+    title: "श्री शिव रुद्राष्टकम",
+    artist: "Religious India",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368182/Audio16_ShivaRudra_cgcxem.mp3",
+    },
+  },
+  {
     title: "Krishna 1",
     artist: "SuprabhaKV",
     src: {
       uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368181/Audio8_Krishna1_ggqiec.mp3",
+    },
+  },
+  {
+    title: "श्री शिव पंचाक्षर",
+    artist: "Religious India",
+    src: {
+      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368931/Audio19_PanchaksharStotra_qzu1bo.mp3",
     },
   },
   {
@@ -76,13 +98,7 @@ const SONGS = [
       uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368160/Audio1_1_Ganeshji_o3gmz8.mp3",
     },
   },
-  {
-    title: "श्री राम स्तुति",
-    artist: "Ravindra Singh",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368161/Audio2_1_Ramji_retbdq.mp3",
-    },
-  },
+
   {
     title: "श्री हनुमान चालीसा",
     artist: "Shankar Mahadevan",
@@ -105,13 +121,6 @@ const SONGS = [
       uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368176/Audio6_RadheRadhe_sp9vlc.mp3",
     },
   },
-  {
-    title: "Kishori Radhe",
-    artist: "Gaurav Krishna Goswami",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368174/Audio7_KishoriRadhe_nxv4sv.mp3",
-    },
-  },
 
   {
     title: "Mata Bhajan",
@@ -128,13 +137,6 @@ const SONGS = [
     },
   },
 
-  {
-    title: "Ram Siya Ram",
-    artist: "SpiritualIndia",
-    src: {
-      uri: "https://res.cloudinary.com/ddb8qrjvx/video/upload/v1741368181/Audio13_RamSiyaRam_rfc4np.mp3",
-    },
-  },
   {
     title: "Hanuman Ji",
     artist: "Divine Shine",

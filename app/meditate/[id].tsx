@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { router } from "expo-router";
 import {
@@ -8,6 +8,7 @@ import {
   ImageBackground,
   Pressable,
   StyleSheet,
+  ImageSourcePropType,
 } from "react-native";
 import { Audio } from "expo-av";
 const API_URL = "https://api.jsonbin.io/v3/b/67d034ab8561e97a50e9f175";
@@ -20,24 +21,46 @@ import music4 from "@/assets/music/Flute3.mp3";
 import music5 from "@/assets/music/Flute5.mp3";
 
 const MUSIC_FILES = [music1, music2, music3, music4, music5];
+interface MeditationItem {
+  imageUrl: string;
+  [key: string]: any;
+}
+interface QuotesResponseWithNestedQuotes {
+  record: {
+    quotes: string[];
+    [key: string]: any;
+  };
+}
+
+interface QuotesResponseWithArrayRecord {
+  record: string[];
+}
+type QuotesResponse =
+  | QuotesResponseWithNestedQuotes
+  | QuotesResponseWithArrayRecord;
 
 const Meditate = () => {
   const { id } = useLocalSearchParams();
-  const [meditationData, setMeditationData] = useState(null);
-  const [quotes, setQuotes] = useState([]);
+  const [meditationData, setMeditationData] = useState<MeditationItem[] | null>(
+    null
+  );
+  const [quotes, setQuotes] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-
+  const soundRef = useRef<Audio.Sound | null>(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         setLoading(true);
         const meditationResponse = await fetch(API_URL);
         const meditationJsonData = await meditationResponse.json();
-        const quotesResponse = await fetch(QUOTES_API_URL);
-        const quotesJsonData = await quotesResponse.json();
+        const QuotesResponse = await fetch(QUOTES_API_URL);
+        const quotesJsonData = await QuotesResponse.json();
+
         setMeditationData(meditationJsonData.record);
         if (
           quotesJsonData.record &&
+          typeof quotesJsonData.record === "object" &&
+          !Array.isArray(quotesJsonData.record) &&
           Array.isArray(quotesJsonData.record.quotes)
         ) {
           setQuotes(quotesJsonData.record.quotes);
@@ -50,6 +73,7 @@ const Meditate = () => {
           console.error("Unexpected quotes format:", quotesJsonData);
           setQuotes([]);
         }
+
         setLoading(false);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -64,10 +88,15 @@ const Meditate = () => {
   const quote =
     quotes.length > 0 ? quotes[index % quotes.length] : "Take a deep breath...";
   const selectedMusic = MUSIC_FILES[index % MUSIC_FILES.length];
-  let sound = null;
+
   useEffect(() => {
     const playMusic = async () => {
       try {
+        if (soundRef.current) {
+          await soundRef.current.stopAsync();
+          await soundRef.current.unloadAsync();
+        }
+
         const { sound: newSound } = await Audio.Sound.createAsync(
           selectedMusic,
           {
@@ -76,7 +105,7 @@ const Meditate = () => {
             shouldPlay: true,
           }
         );
-        sound = newSound;
+        soundRef.current = newSound;
       } catch (error) {
         console.error("Error playing music:", error);
       }
@@ -85,8 +114,10 @@ const Meditate = () => {
     playMusic();
 
     return () => {
-      if (sound) {
-        sound.stopAsync().then(() => sound.unloadAsync());
+      if (soundRef.current) {
+        soundRef.current
+          .stopAsync()
+          .then(() => soundRef.current?.unloadAsync());
       }
     };
   }, [selectedMusic]);
@@ -105,7 +136,11 @@ const Meditate = () => {
       </View>
     );
   }
-  const backgroundImage = { uri: meditationData[index]?.imageUrl };
+
+  const meditationItem = meditationData[index];
+  const backgroundImage: ImageSourcePropType = meditationItem?.imageUrl
+    ? { uri: meditationItem.imageUrl }
+    : require("@/assets/images/background_common.webp"); // Assuming you have a default image
   return (
     <View style={styles.container}>
       <ImageBackground source={backgroundImage} style={styles.background}>
